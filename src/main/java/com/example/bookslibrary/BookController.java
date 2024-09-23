@@ -35,7 +35,12 @@ public class BookController {
     }
 
     @GetMapping(params={"author"})
-    public BookDto getBookFilterByAuthor(@RequestParam String author) {
-        return bookService.getBookFilterByAuthor(author);
+    public List<BookDto> getBookFilterByAuthor(@RequestParam String author) {
+        return bookService.getBooksFilterByAuthor(author);
+    }
+
+    @GetMapping(params={"year"})
+    public List<BookDto> getBookFilterByYear(@RequestParam int year) {
+        return bookService.getBooksFilterByYear(year);
     }
 }

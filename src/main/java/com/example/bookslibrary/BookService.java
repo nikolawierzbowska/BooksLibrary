@@ -3,6 +3,7 @@ package com.example.bookslibrary;
 import com.example.bookslibrary.dto.BookDto;
 import com.example.bookslibrary.exceptions.BookByAuthorNotFoundException;
 import com.example.bookslibrary.exceptions.BookByTittleNotFoundException;
+import com.example.bookslibrary.exceptions.BookByYearNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -47,20 +48,37 @@ public class BookService {
                 .orElseThrow(() -> getBookByTittleNotFoundException(title));
     }
 
-    public BookDto getBookFilterByAuthor(String author) {;
-        return bookRepository.findByAuthor(author.toLowerCase())
+    public List<BookDto> getBooksFilterByAuthor(String author) {;
+        List<BookDto> listBooks = bookRepository.findByAuthor(author.toLowerCase()).stream()
                 .map(book -> bookMapper.mapEntityToDto(book))
-                .orElseThrow(() -> getBookByAuthorNotFoundException(author));
+                .toList();
+        if(listBooks.isEmpty()){
+            throw new BookByAuthorNotFoundException("Not found the books had been written by: " +author);
+        }
+        return listBooks;
+    }
+
+    public List<BookDto> getBooksFilterByYear(int year) {
+        List<BookDto> listBooks = bookRepository.findByYear(year)
+                .stream()
+                .map(book -> bookMapper.mapEntityToDto(book))
+                .toList();
+        if(listBooks.isEmpty()){
+            throw new BookByYearNotFoundException("Not found the book had been written in: " + year);
+        }
+        return listBooks;
     }
 
 
+
     public BookByTittleNotFoundException getBookByTittleNotFoundException(String title) {
-        return new BookByTittleNotFoundException("Not fount the book with that title: " + title);
+        return new BookByTittleNotFoundException("Not found the book with that title: " + title);
     }
 
     public BookByAuthorNotFoundException getBookByAuthorNotFoundException(String author) {
         return new BookByAuthorNotFoundException("Not fount the book with that author: " + author);
     }
+
 
 }
 
