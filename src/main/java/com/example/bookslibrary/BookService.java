@@ -1,6 +1,7 @@
 package com.example.bookslibrary;
 
 import com.example.bookslibrary.dto.BookDto;
+import com.example.bookslibrary.exceptions.BookByAuthorNotFoundException;
 import com.example.bookslibrary.exceptions.BookByTittleNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,7 @@ import java.util.List;
 @Service
 public class BookService {
     private final BookRepository bookRepository;
-    private final  BookMapper bookMapper;
+    private final BookMapper bookMapper;
 
     public BookService(BookRepository bookRepository, BookMapper bookMapper) {
         this.bookRepository = bookRepository;
@@ -43,17 +44,25 @@ public class BookService {
     public BookDto getBookFilterByTitle(String title) {
         return bookRepository.findByTitle(title.toLowerCase())
                 .map(book -> bookMapper.mapEntityToDto(book))
-                .orElseThrow(()-> getBookByTittleNotFoundException(title));
+                .orElseThrow(() -> getBookByTittleNotFoundException(title));
     }
 
-    public BookByTittleNotFoundException getBookByTittleNotFoundException(String title){
+    public BookDto getBookFilterByAuthor(String author) {;
+        return bookRepository.findByAuthor(author.toLowerCase())
+                .map(book -> bookMapper.mapEntityToDto(book))
+                .orElseThrow(() -> getBookByAuthorNotFoundException(author));
+    }
+
+
+    public BookByTittleNotFoundException getBookByTittleNotFoundException(String title) {
         return new BookByTittleNotFoundException("Not fount the book with that title: " + title);
     }
 
-
-
-
-
-
+    public BookByAuthorNotFoundException getBookByAuthorNotFoundException(String author) {
+        return new BookByAuthorNotFoundException("Not fount the book with that author: " + author);
+    }
 
 }
+
+
+

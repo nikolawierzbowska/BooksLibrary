@@ -33,4 +33,9 @@ public class BookController {
     public BookDto getBookFilterByTitle(@RequestParam String title) {
         return bookService.getBookFilterByTitle(title);
     }
+
+    @GetMapping(params={"author"})
+    public BookDto getBookFilterByAuthor(@RequestParam String author) {
+        return bookService.getBookFilterByAuthor(author);
+    }
 }

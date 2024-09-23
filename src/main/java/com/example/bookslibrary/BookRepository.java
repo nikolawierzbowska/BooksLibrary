@@ -16,4 +16,6 @@ public interface BookRepository  extends JpaRepository<Book, UUID>{
     @Query("SELECT book FROM Book book WHERE LOWER(book.title)= LOWER(:title)")
     Optional<Book> findByTitle(String title);
 
+    @Query("SELECT book FROM Book book WHERE LOWER(book.author)= LOWER(:author)")
+    Optional<Book> findByAuthor(String author);
 }

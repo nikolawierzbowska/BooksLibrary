@@ -9,3 +9,6 @@ GET localhost:8080/api/v1/books?titleSort=DSC
 
 #### GET BOOK filter by title
 GET localhost:8080/api/v1/books?title=obCy
+
+#### GET BOOK filter by author
+GET localhost:8080/api/v1/books?author=albert Camus
