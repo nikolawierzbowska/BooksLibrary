@@ -1,5 +1,6 @@
 package com.example.bookslibrary;
 
+import com.example.bookslibrary.dto.BookDto;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,4 +22,7 @@ public interface BookRepository  extends JpaRepository<Book, UUID>{
 
     @Query("SELECT book FROM Book book WHERE book.year= :year")
     List<Book> findByYear(int year);
+
+    @Query("SELECT book FROM Book book WHERE book.rate= :rate")
+    List<Book> findByRate(int rate);
 }

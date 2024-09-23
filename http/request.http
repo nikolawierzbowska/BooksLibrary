@@ -14,4 +14,7 @@ GET localhost:8080/api/v1/books?title=obCy
 GET localhost:8080/api/v1/books?author=albert Camus
 
 #### GET BOOK filter by year
-GET localhost:8080/api/v1/books?year=2023
+GET localhost:8080/api/v1/books?year=2025
+
+#### GET BOOK filter by year
+GET localhost:8080/api/v1/books?rate=0
