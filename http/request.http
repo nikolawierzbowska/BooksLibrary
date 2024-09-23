@@ -1,2 +1,8 @@
 #### GET ALL BOOKS
 GET localhost:8080/api/v1/books
+
+#### GET ALL BOOKS sorted ASC by title
+GET localhost:8080/api/v1/books?title=ASC
+
+#### GET ALL BOOKS sortedDASC by title
+GET localhost:8080/api/v1/books?title=DSC

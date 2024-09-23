@@ -3,8 +3,8 @@ package com.example.bookslibrary;
 import com.example.bookslibrary.dto.BookDto;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class BookService {
@@ -17,10 +17,25 @@ public class BookService {
     }
 
     public List<BookDto> getBooks() {
-        return bookRepository.findAll().stream()
+        return bookRepository.findAll()
+                .stream()
                 .map(book -> bookMapper.mapEntityToDto(book))
                 .toList();
+    }
 
+    public List<BookDto> getBooksSortedAscendingByTitle() {
+        return bookRepository.findAll()
+                .stream()
+                .sorted(Comparator.comparing(Book::getTitle))
+                .map(bookMapper::mapEntityToDto)
+                .toList();
+    }
 
+    public List<BookDto> getBooksSortedDescendingByTitle() {
+        return bookRepository.findAll()
+                .stream()
+                .sorted(Comparator.comparing(Book::getTitle).reversed())
+                .map(bookMapper::mapEntityToDto)
+                .toList();
     }
 }
