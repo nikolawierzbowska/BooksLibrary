@@ -19,13 +19,18 @@ public class BookController {
         return  bookService.getBooks();
     }
 
-    @GetMapping(params={"title"})
-    public List<BookDto> getBooksSortByTitle(@RequestParam String title) {
-            if (title.equals("ASC".toUpperCase())) {
+    @GetMapping(params={"titleSort"})
+    public List<BookDto> getBooksSortedByTitle(@RequestParam String titleSort) {
+            if (titleSort.equals("ASC".toUpperCase())) {
                 return bookService.getBooksSortedAscendingByTitle();
-            } else if (title.equals("DSC".toUpperCase())) {
+            } else if (titleSort.equals("DSC".toUpperCase())) {
                 return bookService.getBooksSortedDescendingByTitle();
             }
-        return getBooks();
+            return getBooks();
+    }
+
+    @GetMapping(params={"title"})
+    public BookDto getBookFilterByTitle(@RequestParam String title) {
+        return bookService.getBookFilterByTitle(title);
     }
 }

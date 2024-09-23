@@ -1,6 +1,7 @@
 package com.example.bookslibrary;
 
 import com.example.bookslibrary.dto.BookDto;
+import com.example.bookslibrary.exceptions.BookByTittleNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -38,4 +39,21 @@ public class BookService {
                 .map(bookMapper::mapEntityToDto)
                 .toList();
     }
+
+    public BookDto getBookFilterByTitle(String title) {
+        return bookRepository.findByTitle(title.toLowerCase())
+                .map(book -> bookMapper.mapEntityToDto(book))
+                .orElseThrow(()-> getBookByTittleNotFoundException(title));
+    }
+
+    public BookByTittleNotFoundException getBookByTittleNotFoundException(String title){
+        return new BookByTittleNotFoundException("Not fount the book with that title: " + title);
+    }
+
+
+
+
+
+
+
 }
