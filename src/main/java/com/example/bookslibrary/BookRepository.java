@@ -25,4 +25,8 @@ public interface BookRepository  extends JpaRepository<Book, UUID>{
 
     @Query("SELECT book FROM Book book WHERE book.rate= :rate")
     List<Book> findByRate(int rate);
+
+    @Query("SELECT book FROM Book book WHERE (book.id= :id)")
+    Optional<Book> findById(UUID id);
+
 }

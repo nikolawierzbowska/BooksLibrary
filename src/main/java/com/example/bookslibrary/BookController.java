@@ -1,8 +1,10 @@
 package com.example.bookslibrary;
 import com.example.bookslibrary.dto.BookDto;
+import com.example.bookslibrary.dto.UpdatedBookDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/books")
@@ -47,5 +49,10 @@ public class BookController {
     @GetMapping(params={"rate"})
     public List<BookDto> getBooksFilterByRate(@RequestParam int rate) {
         return bookService.getBooksFilterByRate(rate);
+    }
+
+    @PatchMapping("/{bookId}")
+    public void updateRate(@PathVariable UUID bookId, @RequestBody UpdatedBookDto updatedBook) {
+        bookService.updateRateOfBook(bookId, updatedBook);
     }
 }

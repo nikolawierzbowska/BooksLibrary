@@ -23,4 +23,7 @@ public class Book {
     private String country;
     private Integer rate;
 
+    public Book(Integer rate) {
+        this.rate = rate;
+    }
 }

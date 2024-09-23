@@ -1,7 +1,8 @@
 package com.example.bookslibrary;
 
 import com.example.bookslibrary.dto.BookDto;
-import com.example.bookslibrary.exceptions.BookByAuthorNotFoundException;
+import com.example.bookslibrary.dto.UpdatedBookDto;
+import com.example.bookslibrary.exceptions.BookByIdNotFoundException;
 import com.example.bookslibrary.exceptions.BookByRateNotFoundException;
 import com.example.bookslibrary.exceptions.BookByTittleNotFoundException;
 import com.example.bookslibrary.exceptions.BookByYearNotFoundException;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class BookService {
@@ -54,7 +56,7 @@ public class BookService {
                 .map(book -> bookMapper.mapEntityToDto(book))
                 .toList();
         if(listBooks.isEmpty()){
-            throw new BookByAuthorNotFoundException("Not found the books had been written by: " +author);
+            throw new BookByIdNotFoundException("Not found the books had been written by: " +author);
         }
         return listBooks;
     }
@@ -74,9 +76,7 @@ public class BookService {
     }
 
     public List<BookDto> getBooksFilterByRate(int rate) {
-        if(rate<1 || rate>5){
-            throw new BookByRateNotFoundException("The range of rate is from 1 to 5. Put the correct rate!");
-        }
+        addRateNotFoundException(rate);
         List<BookDto> listBooks =  bookRepository.findByRate(rate)
                 .stream()
                 .map(book -> bookMapper.mapEntityToDto(book))
@@ -87,14 +87,30 @@ public class BookService {
         return listBooks;
     }
 
+    public void updateRateOfBook(UUID bookId, UpdatedBookDto updateBook) {
+        addRateNotFoundException(updateBook.getRate());
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(()->getBookByAuthorNotFoundException(bookId));
+
+        Book updatedBook = bookMapper.mapDtoToEntity(updateBook);
+        book.setRate(updatedBook.getRate());
+        bookRepository.save(book);
+
+    }
+
     public BookByTittleNotFoundException getBookByTittleNotFoundException(String title) {
         return new BookByTittleNotFoundException("Not found the book with that title: " + title);
     }
 
-    public BookByAuthorNotFoundException getBookByAuthorNotFoundException(String author) {
-        return new BookByAuthorNotFoundException("Not fount the book with that author: " + author);
+    public void addRateNotFoundException(int rate) {
+        if(rate<1 || rate>5){
+            throw new BookByRateNotFoundException("The range of rate is from 1 to 5. Put the correct rate!");
+        }
     }
 
+    public BookByIdNotFoundException getBookByAuthorNotFoundException(UUID id) {
+        return new BookByIdNotFoundException("Not fount the book with that id: " + id);
+    }
 
 
 }

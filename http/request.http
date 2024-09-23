@@ -16,5 +16,14 @@ GET localhost:8080/api/v1/books?author=albert Camus
 #### GET BOOK filter by year
 GET localhost:8080/api/v1/books?year=2025
 
-#### GET BOOK filter by year
-GET localhost:8080/api/v1/books?rate=0
+#### GET BOOK filter by rate
+GET localhost:8080/api/v1/books?rate=2
+
+
+#### PATCH add new rate
+PATCH localhost:8080/api/v1/books/062f817b-b423-4f01-aead-1546c948110a
+Content-Type: application/json
+
+{
+  "rate": 2
+}
