@@ -1,4 +1,4 @@
-package com.example.bookslibrary.dto;
+package com.example.bookslibrary.book.dto;
 
 import java.util.UUID;
 

@@ -1,4 +1,4 @@
-package com.example.bookslibrary;
+package com.example.bookslibrary.book;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

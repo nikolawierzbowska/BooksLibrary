@@ -1,11 +1,11 @@
-package com.example.bookslibrary;
+package com.example.bookslibrary.book;
 
-import com.example.bookslibrary.dto.BookDto;
-import com.example.bookslibrary.dto.UpdatedBookDto;
-import com.example.bookslibrary.exceptions.BookByIdNotFoundException;
-import com.example.bookslibrary.exceptions.BookByRateNotFoundException;
-import com.example.bookslibrary.exceptions.BookByTittleNotFoundException;
-import com.example.bookslibrary.exceptions.BookByYearNotFoundException;
+import com.example.bookslibrary.book.dto.BookDto;
+import com.example.bookslibrary.book.dto.UpdatedBookDto;
+import com.example.bookslibrary.book.exceptions.BookByIdNotFoundException;
+import com.example.bookslibrary.book.exceptions.BookByRateNotFoundException;
+import com.example.bookslibrary.book.exceptions.BookByTittleNotFoundException;
+import com.example.bookslibrary.book.exceptions.BookByYearNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;

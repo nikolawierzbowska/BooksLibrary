@@ -1,7 +1,7 @@
-package com.example.bookslibrary;
+package com.example.bookslibrary.book;
 
-import com.example.bookslibrary.dto.BookDto;
-import com.example.bookslibrary.dto.UpdatedBookDto;
+import com.example.bookslibrary.book.dto.BookDto;
+import com.example.bookslibrary.book.dto.UpdatedBookDto;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,6 +1,5 @@
-package com.example.bookslibrary;
+package com.example.bookslibrary.book;
 
-import com.example.bookslibrary.dto.BookDto;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;

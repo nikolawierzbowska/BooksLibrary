@@ -1,6 +1,6 @@
-package com.example.bookslibrary;
-import com.example.bookslibrary.dto.BookDto;
-import com.example.bookslibrary.dto.UpdatedBookDto;
+package com.example.bookslibrary.book;
+import com.example.bookslibrary.book.dto.BookDto;
+import com.example.bookslibrary.book.dto.UpdatedBookDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
