@@ -2,10 +2,7 @@ package com.example.bookslibrary.book;
 
 import com.example.bookslibrary.book.dto.BookDto;
 import com.example.bookslibrary.book.dto.UpdatedBookDto;
-import com.example.bookslibrary.book.exceptions.BookByIdNotFoundException;
-import com.example.bookslibrary.book.exceptions.BookByRateNotFoundException;
-import com.example.bookslibrary.book.exceptions.BookByTittleNotFoundException;
-import com.example.bookslibrary.book.exceptions.BookByYearNotFoundException;
+import com.example.bookslibrary.book.exceptions.*;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -51,12 +48,12 @@ public class BookService {
                 .orElseThrow(() -> getBookByTittleNotFoundException(title));
     }
 
-    public List<BookDto> getBooksFilterByAuthor(String author) {;
+    public List<BookDto> getBooksFilterByAuthor(String author) {
         List<BookDto> listBooks = bookRepository.findByAuthor(author.toLowerCase()).stream()
                 .map(book -> bookMapper.mapEntityToDto(book))
                 .toList();
         if(listBooks.isEmpty()){
-            throw new BookByIdNotFoundException("Not found the books had been written by: " +author);
+            throw new BookByAuthorNotFoundException("Not found the books had been written by: " +author);
         }
         return listBooks;
     }
