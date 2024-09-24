@@ -19,7 +19,7 @@ public interface BookRepository  extends JpaRepository<Book, UUID>{
     @Query("SELECT book FROM Book book WHERE LOWER(book.author)= LOWER(:author)")
     List<Book> findByAuthor(String author);
 
-    @Query("SELECT book FROM Book book WHERE book.year= :year")
+    @Query("SELECT book FROM Book book WHERE book.yearOfPublication= :year")
     List<Book> findByYear(int year);
 
     @Query("SELECT book FROM Book book WHERE book.rate= :rate")
