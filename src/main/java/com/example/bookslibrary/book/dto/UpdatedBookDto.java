@@ -11,4 +11,7 @@ public class UpdatedBookDto {
 
     private int rate;
 
+    public UpdatedBookDto(int rate) {
+        this.rate = rate;
+    }
 }
