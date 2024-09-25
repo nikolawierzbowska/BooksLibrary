@@ -1,16 +1,16 @@
 <h1>BooksLibrary REST API</h1>
 
-<h3>REQUIREMENTS</h3>
+<h2>REQUIREMENTS</h2>
 JDK 17 
 docker and docker compose installed on your machine
 
-<h3>RUNNING TESTS</h3>
+<h2>RUNNING TESTS</h2>
 ./mvnw clean test
 
-<h3>RUNNING LOCALLY</h3>
+<h2>RUNNING LOCALLY</h2>
 ./mvnw clean build && docker-compose up --build
 
-<h3>ENDPOINTS</h3>
+<h2>ENDPOINTS</h2>
 GET localhost:8080/api/v1/books<br>
 GET localhost:8080/api/v1/books?titleSort=ASC<br>
 GET localhost:8080/api/v1/books?titleSort=DSC<br>
