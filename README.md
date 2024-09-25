@@ -8,7 +8,7 @@ docker and docker compose installed on your machine
 ./mvnw clean test
 
 <h2>RUNNING LOCALLY</h2>
-./mvnw clean build && docker-compose up --build
+./mvnw clean package && docker-compose up --build
 
 <h2>ENDPOINTS</h2>
 GET localhost:8080/api/v1/books<br>
