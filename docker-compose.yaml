@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  bookslibrary-app:
+    build:
+      context: ./
+      dockerfile: docker/Dockerfile
+    container_name: bookslibrary
+    depends_on:
+      bookslibrary-postgres:
+        condition: service_healthy
+    ports:
+      - '8080:8080'
+      - '5005:5005'
+    networks:
+      - bookslibrarynet
+    command: ["java", "-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=*:5005", "-jar", "./bookslibrary.jar"]
+
+  bookslibrary-postgres:
+    image: postgres:15.2
+    container_name: bookslibrarydb
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=nikola
+      - POSTGRES_DB=booksLibrary
+    ports:
+      - '5432:5432'
+    volumes:
+      - bookslibrarydbvol:/var/lib/postgresql/data
+    networks:
+      - bookslibrarynet
+
+networks:
+  bookslibrarynet:
+
+volumes:
+  bookslibrarydbvol:
+
