@@ -10,7 +10,7 @@ import java.util.UUID;
 @RequestMapping("/api/v1/books")
 public class BookController {
 
-    private BookService bookService;
+    private final BookService bookService;
 
     public BookController(BookService bookService) {
         this.bookService = bookService;
